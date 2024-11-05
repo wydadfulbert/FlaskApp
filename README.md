@@ -14,7 +14,8 @@ curl --header "Content-Type: application/json" --request PUT --data '{"begin":"4
 
 ### Coding rules
 
-Exception HTTP Handler: 
+Exception HTTP Handler: https://github.com/charroux/st2scl/blob/main/rentalService/src/main/java/com/example/rentalService/web/CarNotFoundException.java
 
-Logger: 
+Logger: https://github.com/charroux/st2scl/blob/main/rentalService/src/main/java/com/example/rentalService/web/RentalWebService.java
+
 
