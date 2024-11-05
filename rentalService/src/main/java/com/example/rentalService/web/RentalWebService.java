@@ -1,8 +1,10 @@
 package com.example.rentalService.web;
 
 import com.example.rentalService.data.Car;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.rentalService.data.Dates;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.List;
 public class RentalWebService {
 
     List<Car> cars = new ArrayList<Car>();
+
+    Logger logger = LoggerFactory.getLogger(RentalWebService.class);
 
     public RentalWebService() {
         Car car = new Car("11AA22", 1000);
@@ -22,6 +26,33 @@ public class RentalWebService {
     @GetMapping("/cars")
     public List<Car> getCars(){
         return cars;
+    }
+
+    @PutMapping(value = "/cars/{plaque}")
+    public void rent(
+            @PathVariable("plaque") String plateNumber,
+            @RequestParam(value="rent", required = true)boolean rent,
+            @RequestBody Dates dates) throws CarNotFoundException {
+
+        logger.info("Plate number: " + plateNumber);
+        logger.info("Rent: " + rent);
+        logger.info("Dates: " + dates);
+
+        Car car = cars.stream().filter(aCar -> aCar.getPlateNumber().equals(plateNumber)).findFirst().orElse(null);
+        if(car != null){
+            if(rent == true){
+                car.setRented(true);
+                car.getDates().add(dates);
+            } else {
+                car.setRented(false);
+            }
+        } else {
+            throw new CarNotFoundException(plateNumber);
+        }
+
+
+
+
     }
 
 }
