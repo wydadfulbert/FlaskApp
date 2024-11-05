@@ -47,6 +47,7 @@ public class RentalWebService {
                 car.setRented(false);
             }
         } else {
+            logger.error("Car not found: " + plateNumber);
             throw new CarNotFoundException(plateNumber);
         }
 
