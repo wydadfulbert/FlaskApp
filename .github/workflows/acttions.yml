@@ -16,3 +16,5 @@ jobs:
         run: |
           export SHELL=/bin/bash
           ./rentalService/gradlew build
+          docker build -f ./rentalService/Dockerfile -t local/rental .
+          docker images
