@@ -62,5 +62,15 @@ git push origin --delete newcarservice
 
 ### Créer image docker
 
-Ajouter un Dockerfile: 
+Ajouter un Dockerfile: https://github.com/charroux/st2scl/blob/main/rentalService/Dockerfile
 
+Créer une image docker:
+```
+docker build -t rental .   
+```
+Tester l'image:
+```
+docker run -p 8080:8080 rental   
+```
+
+Modifier le script du pipeline CI/CD
