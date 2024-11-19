@@ -30,7 +30,7 @@ jobs:
       - name: Get Kubernetes service URL
         run: |
           kubectl get pods
-          kubectl wait --for=condition=Ready --all
+          kubectl wait --for=condition=Ready --timeout=30s -l app=rentalservice
           minikube service list
           minikube service rentalservice --url
           echo "------------------opening the service------------------"
