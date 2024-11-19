@@ -21,5 +21,24 @@ jobs:
         run: |
           export SHELL=/bin/bash
           ./gradlew build
-          docker build -f ./Dockerfile -t local/rental .
+          docker build -f ./Dockerfile -t local/rentalservice:1 .
           docker images
+          cd ..
+      - name: Deploy the image to minikube
+        run:
+          kubectl apply -f deployment.yml
+      - name: Get Kubernetes service URL
+        run: |
+          kubectl get pods
+          minikube service list
+          minikube service rentalservice --url
+          echo "------------------opening the service------------------"
+      - name: Test Kubernetes service URL
+        uses: nick-fields/retry@v2
+        with:
+          timeout_seconds: 10
+          max_attempts: 4
+          command: curl $(minikube service rentalservice --url)/cars
+      - name: Log Kubernetes pods
+        run: |
+          kubectl logs $(kubectl get pods -l app=rentalservice -o name)
