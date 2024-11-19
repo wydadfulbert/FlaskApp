@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: rentalservice
-          image: local/rentalservice:1
+          image: "rentalservice"
           imagePullPolicy: Never
           ports:
             - containerPort: 8080

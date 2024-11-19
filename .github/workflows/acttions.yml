@@ -21,7 +21,8 @@ jobs:
         run: |
           export SHELL=/bin/bash
           ./gradlew build
-          docker build -f ./Dockerfile -t local/rentalservice:1 .
+          eval $(minikube docker-env)
+          docker build -f ./Dockerfile -t rentalservice .
           docker images
           cd ..
       - name: Deploy the image to minikube
