@@ -75,7 +75,7 @@ docker run -p 8080:8080 rental
 
 Modifier le script du pipeline CI/CD
 
-## Install Istio
+# Install Istio
 
 https://istio.io/latest/docs/setup/getting-started/
 ```
@@ -92,8 +92,7 @@ Install the Istio addons (Kiali, Prometheus, Jaeger, Grafana):
 ```
 kubectl apply -f samples/addons
 ```
-## 
-Enable auto-injection of the Istio side-cars when the pods are started:
+## Enable auto-injection of the Istio side-cars when the pods are started:
 ```
 kubectl label namespace default istio-injection=enabled
 ```
@@ -105,12 +104,12 @@ eval $(minikube -p minikube docker-env)
 eval $(minikube docker-env)  
 ```
 
-### Launch with a gateway using a remote Docker image (from the Docker hub)
+## Launch with a gateway using a remote Docker image (from the Docker hub)
 https://github.com/charroux/st2scl/blob/main/deployment.yml
 ```
 kubectl apply -f deployment.yml  
 ```
-### Launch with a gateway using a local Docker image
+## Launch with a gateway using a local Docker image
 https://github.com/charroux/st2scl/blob/main/deployment-local.yml
 Don't forget to disable the remotre access:
 ```
@@ -119,3 +118,35 @@ eval $(minikube docker-env)
 ```
 kubectl apply -f deployment-local.yml  
 ```
+
+## Retrieve the Gateway address
+```
+kubectl -n istio-system port-forward deployment/istio-ingressgateway 31380:8080
+```
+```
+http://localhost:31380/rentalservice/cars
+```
+
+## Service mesh Istio
+
+### Display the Kiali dashboard
+Kiali is a console for Istio service mesh.
+```
+kubectl -n istio-system port-forward deployment/kiali 20001:20001
+```
+Launch the console: http://localhost:20001/
+
+Active again carservice:
+```
+http://localhost:31380/rentalservice/cars
+```
+
+Then inspect the cluster in Kiali.
+
+#### Monitoring with Graphana
+```
+kubectl -n istio-system port-forward deployment/grafana 3000:3000
+```
+http://localhost:3000/
+
+
