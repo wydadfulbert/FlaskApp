@@ -106,10 +106,12 @@ eval $(minikube docker-env)
 ```
 
 ### Launch with a gateway using a remote Docker image (from the Docker hub)
+https://github.com/charroux/st2scl/blob/main/deployment.yml
 ```
 kubectl apply -f deployment.yml  
 ```
 ### Launch with a gateway using a local Docker image
+https://github.com/charroux/st2scl/blob/main/deployment-local.yml
 Don't forget to disable the remotre access:
 ```
 eval $(minikube docker-env)
