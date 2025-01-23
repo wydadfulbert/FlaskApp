@@ -57,3 +57,20 @@ git branch -D newcarservice
 ```
 git push origin --delete newcarservice
 ```
+
+### Docker
+
+Create a Dockerfile in the code folder: https://github.com/charroux/st2scl/blob/main/rentalService/Dockerfile
+
+Build a Docker image:
+```
+docker build -t rentalservice .      
+```
+Run the container:
+```
+docker run -p 4000:8080 rentalservice    
+```
+Then check in your browser:
+```
+http://localhost:4000/cars
+```
