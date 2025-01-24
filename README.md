@@ -74,3 +74,21 @@ Then check in your browser:
 ```
 http://localhost:4000/cars
 ```
+
+### Publish the Docker image to the Docker Hub
+
+Tager l'image :
+```
+docker tag 4da2332370c7 votreIdDocherHub/rental:1
+```
+où le numéro est l'identifiant de l'image donné par docker images, et 1 est un numéro de version
+
+Se connecter au Docker Hub : 
+```
+docker login
+```
+
+Publier l'image :
+```
+docker push votreIdDocherHub/rental:1      
+```
