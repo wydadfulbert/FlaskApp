@@ -133,3 +133,8 @@ Récupérer l'adresse du service :
 ```
 minikube service rentalservice --url                      
 ```    
+Tester dans votre navigateur :
+
+http://127.0.0.1:50784/cars
+
+En adaptant l'URL.
