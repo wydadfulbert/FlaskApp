@@ -152,6 +152,8 @@ kubectl apply -f deployment.yml
 
 Le fichier yaml : https://github.com/charroux/st2scl/blob/main/deployment.yml
 
+## Mettre en place une gateway 
+
 ### Install Istio
 https://istio.io/latest/docs/setup/getting-started/
 
