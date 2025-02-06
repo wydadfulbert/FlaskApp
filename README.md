@@ -138,3 +138,10 @@ Tester dans votre navigateur :
 http://127.0.0.1:50784/cars
 
 En adaptant l'URL.
+
+### Déployer via des fichiers yaml
+```
+kubectl apply -f deployment.yml           
+```
+
+Le fichier yaml : 
