@@ -106,7 +106,13 @@ Combien de noeuds dans le cluster?
 ```
 kubectl get nodes      
 ```
-Désployer votre image Docker :
+
+Dashboard pour inspecter le cluster : 
+```
+minikube dashboard
+```
+
+Déployer votre image Docker :
 ```
 kubectl create deployment rentalservice --image=charroux/rentalservice:1      
 ```
@@ -144,4 +150,4 @@ En adaptant l'URL.
 kubectl apply -f deployment.yml           
 ```
 
-Le fichier yaml : 
+Le fichier yaml : https://github.com/charroux/st2scl/blob/main/deployment.yml
