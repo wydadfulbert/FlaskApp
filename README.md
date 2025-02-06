@@ -190,7 +190,7 @@ eval $(minikube docker-env)
 
 Check the configuration at 53: https://github.com/charroux/st2scl/blob/main/deployment.yml
 
-Check also where the Kubernetes service is registered in the gataway at line 72.
+Check also where the Kubernetes service is registered in the gateway at line 72.
 
 Apply again the config:
 ```
