@@ -1,17 +1,20 @@
-# Utilisation de l'image officielle Python comme base
+# Utiliser une image Python officielle comme base
 FROM python:3.9-slim
 
-# Créer un répertoire dans le container pour le code
+# Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copier les fichiers locaux (ici, ton script Python) vers le container
-COPY . /app
+# Copier le fichier requirements.txt dans le conteneur
+COPY requirements.txt .
 
-# Installer Flask à l'intérieur du container
-RUN pip install --no-cache-dir flask
+# Installer toutes les dépendances listées dans requirements.txt
+RUN pip install -r requirements.txt
 
-# Exposer le port 5000 sur lequel le service Flask tourne
+# Copier tous les fichiers de l'application dans le conteneur
+COPY . .
+
+# Exposer le port sur lequel l'app écoute
 EXPOSE 5000
 
-# Lancer ton script Flask quand le container démarre
-CMD ["python", "script1.py"]
+# Lancer l'application
+CMD ["python", "app2.py"]

@@ -1,0 +1,17 @@
+# Utilise une image Python de base
+FROM python:3.9-slim
+
+# Crée un répertoire pour l'application
+WORKDIR /app
+
+# Copie le fichier app2.py dans l'image
+COPY app2.py /app
+
+# Installe les dépendances nécessaires
+RUN pip install --no-cache-dir psycopg2-binary
+
+# Expose le port de l'application
+EXPOSE 5000
+
+# Exécute l'application Flask
+CMD ["python", "app2.py"]
