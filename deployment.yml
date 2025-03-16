@@ -1,52 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: rentalservice
-    version: "1.0"
-  name: rentalservice
+  name: mon-flask-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: rentalservice
-  strategy: {}
+      app: mon-flask-app
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        app: rentalservice
+        app: mon-flask-app
     spec:
       containers:
-        - name: rentalservice
-          image: charroux/rentalservice:1
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
-          resources: {}
-      restartPolicy: Always
-status: {}
+      - name: mon-flask-app
+        image: wydadfulbert/mon-flask-app:latest
+        ports:
+        - containerPort: 5000
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
-  labels:
-    app: rentalservice
-  name: rentalservice
+  name: mon-flask-app
 spec:
-  ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 8080
-      name: http
   selector:
-    app: rentalservice
+    app: mon-flask-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
   type: LoadBalancer
-status:
-  loadBalancer: {}
 
 ---
 
@@ -65,13 +50,12 @@ spec:
       hosts:
         - "*"
 
-
 ---
 
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: carservice
+  name: mon-flask-app
 spec:
   hosts:
     - "*"
@@ -80,11 +64,11 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /rentalservice/
+            prefix: /mon-flask-app/
       rewrite:
         uri: /
       route:
         - destination:
             port:
               number: 80
-            host: rentalservice.default.svc.cluster.local
+            host: mon-flask-app.default.svc.cluster.local
