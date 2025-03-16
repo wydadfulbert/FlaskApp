@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mon-flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mon-flask-app
+  template:
+    metadata:
+      labels:
+        app: mon-flask-app
+    spec:
+      containers:
+      - name: mon-flask-app
+        image: wydadfulbert/mon-flask-app:latest  
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mon-flask-app-service
+spec:
+  selector:
+    app: mon-flask-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: NodePort
